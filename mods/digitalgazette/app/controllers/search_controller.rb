@@ -32,13 +32,13 @@ class SearchController < ApplicationController
 
     #FIXME this won't happen, we have no @pages anymore
     #if there was a text string in the search, generate extracts for the results
-    if @path.search_text and @pages.any?
-      begin
-        add_excerpts_to_pages(@pages)
-      rescue Errno::ECONNREFUSED, Riddle::VersionError, Riddle::ResponseError => err
-        RAILS_DEFAULT_LOGGER.warn "failed to extract keywords from sphinx search: #{err}."
-      end
-    end
+    # if @path.search_text and @pages.any?
+    #   begin
+    #     add_excerpts_to_pages(@pages)
+    #   rescue Errno::ECONNREFUSED, Riddle::VersionError, Riddle::ResponseError => err
+    #     RAILS_DEFAULT_LOGGER.warn "failed to extract keywords from sphinx search: #{err}."
+    #   end
+    # end
 
     full_url = search_url + @path
     handle_rss(:title => full_url, :link => full_url,
@@ -137,8 +137,6 @@ class SearchController < ApplicationController
     # would be available
     #
     # try something like @pages.to_json
-
-
   end
 
 
